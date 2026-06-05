@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KyperHub | Roblox Scripts</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Base & Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* --- Colors & Variables --- */
+        :root {
+            --purple: #9d00ff;
+            --purple-hover: #b94dff;
+            --black-light: #121212;
+            --black-card: #1a1a1a;
+            --green: #00ff22;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: var(--black-light);
+            border-bottom: 2px solid var(--purple);
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--purple);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Status Indicator */
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            background: rgba(0, 255, 34, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--green);
+            color: var(--green);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background-color: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 34, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 34, 0); }
+        }
+
+        /* Discord Button */
+        .discord-btn {
+            background-color: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: radial-gradient(circle at center, #24003d 0%, #050505 60%);
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px var(--purple);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #b3b3b3;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background-color: var(--purple);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.5);
+        }
+
+        .copy-btn:hover {
+            background-color: var(--purple-hover);
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* --- Supported Games Section --- */
+        .games-section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .games-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #fff;
+            border-bottom: 3px solid var(--purple);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .game-card {
+            background-color: var(--black-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            border-color: var(--purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(157, 0, 255, 0.2);
+        }
+
+        .game-img-container {
+            width: 100%;
+            height: 200px;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .game-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Fallback icon for "Soon" */
+        .soon-icon {
+            font-size: 80px;
+            color: var(--purple);
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .game-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--black-light);
+            color: #666;
+            margin-top: 50px;
+            border-top: 1px solid #222;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">Kyper<span>Hub</span></div>
+        <div class="nav-right">
+            <div class="status">
+                <div class="status-dot"></div>
+                Supported
+            </div>
+            <a href="https://discord.gg/bWGz5R33YZ" target="_blank" class="discord-btn">
+                <i class="fab fa-discord"></i> Join Discord
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Kyper<span>Hub</span></h1>
+        <p>The ultimate and most powerful Roblox scripting experience. Get started instantly by copying our loader below.</p>
+        
+        <button class="copy-btn" id="copyBtn" onclick="copyScript()">
+            <i class="fas fa-code"></i> <span>Copy Script</span>
+        </button>
+    </section>
+
+    <!-- Supported Games Section -->
+    <section class="games-section">
+        <h2>Supported Games</h2>
+        
+        <div class="games-grid">
+            <!-- Game 1: Life Sentence -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <!-- Placeholder image matching your game theme (Dark/Prison vibe) -->
+                    <img src="https://images.unsplash.com/photo-1584282459207-6750058b8849?auto=format&fit=crop&w=600&q=80" alt="Life Sentence">
+                </div>
+                <div class="game-info">
+                    <h3>Life Sentence</h3>
+                    <p style="color: var(--green);"><i class="fas fa-check-circle"></i> Fully Supported</p>
+                </div>
+            </div>
+
+            <!-- Game 2: Coming Soon -->
+            <div class="game-card">
+                <div class="game-img-container" style="background: radial-gradient(#1a0033, #000);">
+                    <i class="fas fa-clock soon-icon"></i>
+                </div>
+                <div class="game-info">
+                    <h3>Coming Soon...</h3>
+                    <p style="color: #b3b3b3;"><i class="fas fa-hourglass-half"></i> In Development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 KyperHub. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Copy Function -->
+    <script>
+        function copyScript() {
+            // The script to be copied
+            const scriptText = "loadstring(game:HttpGet('https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/Life%20Sentence.lua'))()";
+            
+            // Copy to clipboard
+            navigator.clipboard.writeText(scriptText).then(() => {
+                const btn = document.getElementById("copyBtn");
+                const btnText = btn.querySelector("span");
+                const btnIcon = btn.querySelector("i");
+                
+                // Change appearance to show success
+                btnText.innerText = "Copied!";
+                btnIcon.className = "fas fa-check";
+                btn.style.backgroundColor = "var(--green)";
+                btn.style.boxShadow = "0 0 15px rgba(0, 255, 34, 0.5)";
+                
+                // Reset back to normal after 3 seconds
+                setTimeout(() => {
+                    btnText.innerText = "Copy Script";
+                    btnIcon.className = "fas fa-code";
+                    btn.style.backgroundColor = "var(--purple)";
+                    btn.style.boxShadow = "0 0 15px rgba(157, 0, 255, 0.5)";
+                }, 3000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert("Failed to copy script. Please try manually.");
+            });
+        }
+    </script>
+</body>
+</html>
