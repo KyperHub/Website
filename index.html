@@ -41,7 +41,18 @@
             box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
         }
 
-        .logo {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
             font-size: 28px;
             font-weight: bold;
             color: #fff;
@@ -49,7 +60,7 @@
             letter-spacing: 2px;
         }
 
-        .logo span {
+        .logo-text span {
             color: var(--purple);
         }
 
@@ -247,7 +258,10 @@
 
     <!-- Navigation Bar -->
     <nav>
-        <div class="logo">Kyper<span>Hub</span></div>
+        <div class="logo-container">
+            <img src="1000059473.jpg" alt="KyperHub Logo" class="logo-img">
+            <div class="logo-text">Kyper<span>Hub</span></div>
+        </div>
         <div class="nav-right">
             <div class="status">
                 <div class="status-dot"></div>
@@ -277,8 +291,7 @@
             <!-- Game 1: Life Sentence -->
             <div class="game-card">
                 <div class="game-img-container">
-                    <!-- Placeholder image matching your game theme (Dark/Prison vibe) -->
-                    <img src="https://images.unsplash.com/photo-1584282459207-6750058b8849?auto=format&fit=crop&w=600&q=80" alt="Life Sentence">
+                    <img src="1000059472.jpg" alt="Life Sentence">
                 </div>
                 <div class="game-info">
                     <h3>Life Sentence</h3>
