@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KyperHub | Roblox Scripts</title>
-    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- Base & Reset --- */
@@ -135,9 +134,44 @@
         .hero p {
             font-size: 18px;
             color: #b3b3b3;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             max-width: 600px;
             margin-inline: auto;
+        }
+
+        /* Dropdown Selection Style */
+        .select-container {
+            margin-bottom: 25px;
+        }
+
+        .game-select {
+            background-color: var(--black-card);
+            color: white;
+            border: 2px solid var(--purple);
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            width: 100%;
+            max-width: 320px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(157, 0, 255, 0.2);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            /* Custom Purple Arrow icon */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%239d00ff" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            padding-right: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .game-select:focus {
+            border-color: var(--purple-hover);
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.6);
         }
 
         /* Copy Button */
@@ -166,7 +200,7 @@
         /* --- Supported Games Section --- */
         .games-section {
             padding: 50px 20px;
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             text-align: center;
         }
@@ -205,7 +239,6 @@
 
         .game-img-container {
             width: 100%;
-            /* التعديل هنا: جعل الحاوية مربعة تماماً */
             aspect-ratio: 1 / 1; 
             background-color: #111;
             display: flex;
@@ -218,7 +251,6 @@
         .game-img-container img {
             width: 100%;
             height: 100%;
-            /* بما أن الحاوية مربعة والصورة مربعة، ستظهر كاملة */
             object-fit: cover; 
         }
 
@@ -265,10 +297,9 @@
 </head>
 <body>
 
-    <!-- Navigation Bar -->
     <nav>
         <div class="logo-container">
-            <img src="Picsart_26-06-05_01-10-33-428.png" alt="KyperHub Logo" class="logo-img">
+            <img src="KyperLogo.png" alt="KyperHub Logo" class="logo-img">
             <div class="logo-text">Kyper<span>Hub</span></div>
         </div>
         <div class="nav-right">
@@ -282,25 +313,30 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <h1>Welcome to Kyper<span>Hub</span></h1>
-        <p>The ultimate and most powerful Roblox scripting experience. Get started instantly by copying our loader below.</p>
+        <p>The ultimate and most powerful Roblox scripting experience. Select your game and copy the loader below.</p>
         
+        <div class="select-container">
+            <select id="gameSelect" class="game-select">
+                <option value="" disabled selected>— اختر اللعبة / Select Game —</option>
+                <option value="life-sentence">Life Sentence</option>
+                <option value="valley-prison">Valley Prison</option>
+            </select>
+        </div>
+
         <button class="copy-btn" id="copyBtn" onclick="copyScript()">
             <i class="fas fa-code"></i> <span>Copy Script</span>
         </button>
     </section>
 
-    <!-- Supported Games Section -->
     <section class="games-section">
         <h2>Supported Games</h2>
         
         <div class="games-grid">
-            <!-- Game 1: Life Sentence -->
             <div class="game-card">
                 <div class="game-img-container">
-                    <img src="images (1).jpeg" alt="Life Sentence">
+                    <img src="LifeSentence.jpeg" alt="Life Sentence">
                 </div>
                 <div class="game-info">
                     <h3>Life Sentence</h3>
@@ -308,7 +344,16 @@
                 </div>
             </div>
 
-            <!-- Game 2: Coming Soon -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <img src="ValleyPrison.png" alt="Valley Prison">
+                </div>
+                <div class="game-info">
+                    <h3>Valley Prison</h3>
+                    <p style="color: var(--green);"><i class="fas fa-check-circle"></i> Fully Supported</p>
+                </div>
+            </div>
+
             <div class="game-card">
                 <div class="game-img-container" style="background: radial-gradient(#1a0033, #000);">
                     <i class="fas fa-clock soon-icon"></i>
@@ -321,16 +366,29 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 KyperHub. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for Copy Function -->
     <script>
         function copyScript() {
-            const scriptText = "loadstring(game:HttpGet('https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/Life%20Sentence.lua'))()";
+            const gameSelect = document.getElementById("gameSelect");
+            const selectedGame = gameSelect.value;
             
+            let scriptText = "";
+            
+            // تحقق من اللعبة المختارة وتحديد السكربت المناسب
+            if (selectedGame === "life-sentence") {
+                scriptText = `loadstring(game:HttpGet("https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/LifeSentence.lua"))()`;
+            } else if (selectedGame === "valley-prison") {
+                scriptText = `loadstring(game:HttpGet("https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/ValleyPrison.lua"))()`;
+            } else {
+                // رسالة تنبيه للمستخدم إذا لم يقم بالاختيار أولاً
+                alert("Please select a game first!");
+                return;
+            }
+            
+            // نسخ السكربت إلى الحافظة
             navigator.clipboard.writeText(scriptText).then(() => {
                 const btn = document.getElementById("copyBtn");
                 const btnText = btn.querySelector("span");
