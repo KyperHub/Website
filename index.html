@@ -202,6 +202,14 @@
             margin-top: 3px;
         }
 
+        /* Warning Status overrides */
+        .support-status.limited span {
+            color: var(--warning);
+        }
+        .support-status.limited i {
+            color: var(--warning);
+        }
+
         /* Card Copy Button */
         .card-copy-btn {
             background-color: var(--purple);
@@ -258,7 +266,7 @@
         }
 
         .executors-content {
-            display: none; /* Hidden by default */
+            display: none;
             background-color: #0a0a0a;
             border: 1px solid #222;
             border-top: none;
@@ -382,7 +390,7 @@
                     <h3>Life Sentence</h3>
                     <div class="support-status">
                         <i class="fas fa-check-circle"></i>
-                        <span>Fully Supported. Supports all executors.</span>
+                        <span>Fully Supported.</span>
                     </div>
                     <button class="card-copy-btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/LifeSentence.lua\'))()', this)">
                         <i class="fas fa-code"></i> Copy Script
@@ -398,7 +406,7 @@
                     <h3>Valley Prison</h3>
                     <div class="support-status">
                         <i class="fas fa-check-circle"></i>
-                        <span>Fully Supported. Supports all executors.</span>
+                        <span>Fully Supported.</span>
                     </div>
                     <button class="card-copy-btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/ValleyPrison.lua\'))()', this)">
                         <i class="fas fa-code"></i> Copy Script
@@ -412,9 +420,9 @@
                 </div>
                 <div class="game-info">
                     <h3>Jail Break</h3>
-                    <div class="support-status">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Fully Supported. Supports specific Verified Executors only.</span>
+                    <div class="support-status limited">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Limited Support. Supports specific Verified Executors only.</span>
                     </div>
                     <button class="card-copy-btn" onclick="copyScript('loadstring(game:HttpGet(\'https://raw.githubusercontent.com/KyperHub/Scripts/refs/heads/main/JailBreak.lua\'))()', this)">
                         <i class="fas fa-code"></i> Copy Script
@@ -520,7 +528,7 @@
                 toggleIcon.className = "fas fa-chevron-up";
                 toggleText.innerText = "Hide Verified Executors";
                 
-                // Smooth scroll to the executors section so the user sees it
+                // Smooth scroll to the executors section
                 setTimeout(() => {
                     content.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
